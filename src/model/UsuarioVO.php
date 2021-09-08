@@ -1,11 +1,10 @@
 <?php 
 
-class usuario_VO{
+class usuarioVO{
     
     private $idUsuario;
     private $nome;
     private $senha;
-    private $cpf;
 
 
     /**
@@ -64,26 +63,6 @@ class usuario_VO{
     public function setSenha($senha)
     {
         $this->senha = $senha;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of cpf
-     */ 
-    public function getCpf()
-    {
-        return $this->cpf;
-    }
-
-    /**
-     * Set the value of cpf
-     *
-     * @return  self
-     */ 
-    public function setCpf($cpf)
-    {
-        $this->cpf = $cpf;
 
         return $this;
     }

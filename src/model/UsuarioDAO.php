@@ -1,19 +1,18 @@
 <?php 
 
-include_once './config/mysqlConfig.php';
+include_once './config/MySqlConfig.php';
 
-class usuario_RN{
+class usuarioDAO{
 
     public function inserirUsuario($usuario){
         try {
-
-            if($this->selectCpfUsuario($usuario) == new usuario_VO()){
+            if($this->selectUsuarioNome($usuario) == new usuarioVO()){
 
                 $conexao = new conexaoBD;
                 $conexao = $conexao->conectar();
             
-                $query = $conexao->prepare( "INSERT INTO usuario (nome, senha, cpf) VALUES (?,?,?)");
-                $query->execute(array($usuario->getNome(), $usuario->getSenha(), $usuario->getCpf()));
+                $query = $conexao->prepare( "INSERT INTO usuario (nome, senha) VALUES (?,?)");
+                $query->execute(array($usuario->getNome(), $usuario->getSenha()));
 
                 $conexao = null;
 
@@ -47,11 +46,11 @@ class usuario_RN{
         } catch (PDOException $pdo) {
             echo $pdo->echo;
         } catch (Exception $e){
-            echo $e;
+            echo $e->getMessage();
         }
     }
 
-    public function selectIdUsuario($usuario){
+    public function selectUsuarioID($usuario){
         try {
             $conexao = new conexaoBD;
             $conexao = $conexao->conectar();
@@ -62,13 +61,12 @@ class usuario_RN{
             $conexao = null;
 
             if($query){
-                $usuarioBD = new usuario_VO();
+                $usuarioBD = new usuarioVO();
 
                 foreach($query as $user){
                     $usuarioBD->setIdUsuario($user['idUsuario']);
                     $usuarioBD->setNome($user['nome']);
                     $usuarioBD->setSenha($user['senha']);
-                    $usuarioBD->setCpf($user['cpf']);
                 }
 
                 return $usuarioBD;
@@ -80,28 +78,27 @@ class usuario_RN{
         } catch (PDOException $pdo) {
             echo $pdo->echo;
         } catch (Exception $e){
-            echo $e;
+            echo $e->getMessage();
         }
     }
 
-    public function selectCpfUsuario($usuario){
+    public function selectUsuarioNome($usuario){
         try {
             $conexao = new conexaoBD;
             $conexao = $conexao->conectar();
 
-            $query = $conexao->prepare( "SELECT * FROM usuario WHERE cpf = ?");
-            $query->execute(array($usuario->getCpf()));
+            $query = $conexao->prepare( "SELECT * FROM usuario WHERE nome = ?");
+            $query->execute(array($usuario->getNome()));
 
             $conexao = null;
 
             if($query){
-                $usuarioBD = new usuario_VO();
+                $usuarioBD = new usuarioVO();
 
                 foreach($query as $user){
                     $usuarioBD->setIdUsuario($user['idUsuario']);
                     $usuarioBD->setNome($user['nome']);
                     $usuarioBD->setSenha($user['senha']);
-                    $usuarioBD->setCpf($user['cpf']);
                 }
 
                 return $usuarioBD;
@@ -113,7 +110,59 @@ class usuario_RN{
         } catch (PDOException $pdo) {
             echo $pdo->echo;
         } catch (Exception $e){
-            echo $e;
+            echo $e->getMessage();
+        }
+    }
+
+    public function editarUsuario($usuario){
+
+        //altera nome e senha do usuario
+        try {
+            $conexao = new conexaoBD;
+            $conexao = $conexao->conectar();
+        
+            $query = $conexao->prepare( "UPDATE usuario SET nome = ?, senha = ? WHERE idUsuario = ?");
+            $query->execute(array($usuario->getNome(), $usuario->getSenha(), $usuario->getIdUsuario()));
+
+            $conexao = null;
+
+            return True;
+
+        } catch (PDOException $pdo) {
+            echo $pdo->echo;
+        } catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+
+    public function login ($usuario){
+        try {
+            $conexao = new conexaoBD;
+            $conexao = $conexao->conectar();
+
+            $query = $conexao->prepare( "SELECT * FROM usuario WHERE nome = ? and senha = ? ");
+            $query->execute(array($usuario->getNome(), $usuario->getSenha()));
+
+            $conexao = null;
+
+            if($query){
+                foreach($query as $user){
+                    if ($user['nome'] == $usuario->getNome() and $user['senha'] == $usuario->getSenha()){
+                        $usuario->setIdUsuario($user['idUsuario']);
+                    }
+                    
+                }
+
+                return $usuario;
+
+            }else {
+                return null;
+            }            
+
+        } catch (PDOException $pdo) {
+            echo $pdo->echo;
+        } catch (Exception $e){
+            echo $e->getMessage();
         }
     }
 

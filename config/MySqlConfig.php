@@ -4,7 +4,7 @@ class conexaoBD{
 
     public function conectar(){
 
-        $endereco = 'localhost';
+        $endereco = '127.0.0.1';
         $usuario  = 'root';
         $senha    = '';
         $database = 'gu_market';

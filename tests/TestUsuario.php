@@ -1,7 +1,6 @@
 <?php
 
-include_once './src/model/UsuarioDAO.php';
-include_once './src/model/UsuarioVO.php';
+include_once "./src/model/DAO/UsuarioDAO.php";
 
 class TestUsuarioRN{
 
@@ -22,7 +21,8 @@ class TestUsuarioRN{
             $this->testa_deletar($usuario, $usuarioDAO, $ok);  
 
             if ($ok){
-                echo 'Teste OK';
+                echo 'Teste Usuario RN OK';
+
             } else {
                 echo 'Teste falhou';
             }
@@ -102,5 +102,8 @@ class TestUsuarioRN{
     
 
 }
+
+$user = new TestUsuarioRN();
+$user->test_funcoes_usuario();
 
 ?>

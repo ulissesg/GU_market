@@ -37,7 +37,7 @@ class usuarioDAO{
             $conexao = new conexaoBD;
             $conexao = $conexao->conectar();
 
-            $query = $conexao->prepare( "DELETE FROM usuario WHERE idUsuario = ?");
+            $query = $conexao->prepare("DELETE FROM usuario WHERE idUsuario = ?");
             $query->execute(array($usuario->getIdUsuario()));
 
             $conexao = null;

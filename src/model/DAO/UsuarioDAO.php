@@ -1,6 +1,7 @@
 <?php 
 
-include_once './config/MySqlConfig.php';
+include_once  "./src/model/VO/UsuarioVO.php";
+include_once  "./config/MySqlConfig.php";
 
 class usuarioDAO{
 
@@ -25,7 +26,7 @@ class usuarioDAO{
             }
 
         } catch (PDOException $pdo) {
-            echo $pdo->echo;
+            echo $pdo->getMessage();
         } catch (Exception $e){
             echo $e->getMessage();
         }
@@ -44,7 +45,7 @@ class usuarioDAO{
             return true;
 
         } catch (PDOException $pdo) {
-            echo $pdo->echo;
+            echo $pdo->getMessage();
         } catch (Exception $e){
             echo $e->getMessage();
         }
@@ -76,7 +77,7 @@ class usuarioDAO{
             }            
 
         } catch (PDOException $pdo) {
-            echo $pdo->echo;
+            echo $pdo->getMessage();
         } catch (Exception $e){
             echo $e->getMessage();
         }
@@ -108,7 +109,7 @@ class usuarioDAO{
             }            
 
         } catch (PDOException $pdo) {
-            echo $pdo->echo;
+            echo $pdo->getMessage();
         } catch (Exception $e){
             echo $e->getMessage();
         }
@@ -129,7 +130,7 @@ class usuarioDAO{
             return True;
 
         } catch (PDOException $pdo) {
-            echo $pdo->echo;
+            echo $pdo->getMessage();
         } catch (Exception $e){
             echo $e->getMessage();
         }
@@ -160,7 +161,7 @@ class usuarioDAO{
             }            
 
         } catch (PDOException $pdo) {
-            echo $pdo->echo;
+            echo $pdo->getMessage();
         } catch (Exception $e){
             echo $e->getMessage();
         }

@@ -2,7 +2,7 @@
 
 include_once "./src/model/DAO/UsuarioDAO.php";
 
-class TestUsuarioRN{
+class TestUsuarioDAO{
 
     public function test_funcoes_usuario(){
         // Testa as querys do usuario
@@ -21,10 +21,10 @@ class TestUsuarioRN{
             $this->testa_deletar($usuario, $usuarioDAO, $ok);  
 
             if ($ok){
-                echo 'Teste Usuario RN OK';
+                echo 'Teste Usuario DAO OK';
 
             } else {
-                echo 'Teste falhou';
+                echo 'Teste Usuario DAO falhou';
             }
 
         } catch (Exception $e) {
@@ -103,7 +103,7 @@ class TestUsuarioRN{
 
 }
 
-$user = new TestUsuarioRN();
+$user = new TestUsuarioDAO();
 $user->test_funcoes_usuario();
 
 ?>

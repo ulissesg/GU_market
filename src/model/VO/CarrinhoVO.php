@@ -1,6 +1,6 @@
 <?php 
 
-class carrinho_VO{
+class CarrinhoVO{
     
     private $idCarrinho;
     private $usuario;

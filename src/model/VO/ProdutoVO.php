@@ -1,6 +1,6 @@
 <?php 
 
-class produto_VO{
+class ProdutoVO{
 
     private $idProduto;
     private $nome;

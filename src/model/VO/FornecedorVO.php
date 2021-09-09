@@ -1,6 +1,6 @@
 <?php
 
-class fornecedor_VO{
+class FornecedorVO{
 
     protected $idFornecedor;
     protected $nome;

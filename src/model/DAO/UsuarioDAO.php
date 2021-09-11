@@ -32,25 +32,6 @@ class usuarioDAO{
         }
     }
 
-    public function deletarUsuario($usuario){
-        try {
-            $conexao = new conexaoBD;
-            $conexao = $conexao->conectar();
-
-            $query = $conexao->prepare("DELETE FROM usuario WHERE idUsuario = ?");
-            $query->execute(array($usuario->getIdUsuario()));
-
-            $conexao = null;
-
-            return true;
-
-        } catch (PDOException $pdo) {
-            echo $pdo->getMessage();
-        } catch (Exception $e){
-            echo $e->getMessage();
-        }
-    }
-
     public function selectUsuarioID($usuario){
         try {
             $conexao = new conexaoBD;
@@ -166,6 +147,27 @@ class usuarioDAO{
             echo $e->getMessage();
         }
     }
+
+    public function deletarUsuario($usuario){
+        try {
+            $conexao = new conexaoBD;
+            $conexao = $conexao->conectar();
+
+            $query = $conexao->prepare("DELETE FROM usuario WHERE idUsuario = ?");
+            $query->execute(array($usuario->getIdUsuario()));
+
+            $conexao = null;
+
+            return true;
+
+        } catch (PDOException $pdo) {
+            echo $pdo->getMessage();
+        } catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+
+    
 
 }
 

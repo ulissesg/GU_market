@@ -150,6 +150,10 @@ class ProdutoVO{
 
         return $this;
     }
+
+    public function isValido(){
+        // TODO
+    }
 }
 
 ?>

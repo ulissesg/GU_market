@@ -49,10 +49,14 @@ class TestUsuarioDAO{
                 $ok = true;
                 $usuario->setIdUsuario($usuarioBD->getIdUsuario());
 
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
             }
 
         }else {
             $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
 
@@ -73,34 +77,52 @@ class TestUsuarioDAO{
                 $ok = true;
                 $usuario->setIdUsuario($usuarioBD->getIdUsuario());
 
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
             }
 
         }else {
             $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
 
     private function testar_login($usuario, $usuarioDAO, &$ok){
+        
         $usuarioBD = $usuarioDAO->login($usuario);
         
-        if ($usuario == $usuarioBD){
-            $ok = true;
-        } else {
+        if ($usuarioBD){
+            if ($usuario == $usuarioBD){
+                $ok = true;
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
+            }
+
+        }else {
             $ok = false;
+            throw new Error('No results back from bd', 1);
         }
         
     }
 
     private function testa_deletar($usuario, $usuarioDAO, &$ok){
-        $usuarioDAO->deletarUsuario($usuario);
+    
+        if ($usuarioDAO->deletarUsuario($usuario)){
 
-        if ($usuarioDAO->selectUsuarioID($usuario) == new usuarioVO()){
-            $ok = true;
+            if ($usuarioDAO->selectUsuarioID($usuario) == new usuarioVO()){
+                $ok = true;
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
+            }
+
+        }else {
+            $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
-
-    
-
 }
 
 $user = new TestUsuarioDAO();

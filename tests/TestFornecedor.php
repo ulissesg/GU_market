@@ -47,10 +47,14 @@ class TestFornecedorDAO{
                 $ok = true;
                 $fornecedor->setIdFornecedor($fornecedorBD->getIdFornecedor());
 
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
             }
 
         }else {
             $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
 
@@ -71,23 +75,33 @@ class TestFornecedorDAO{
                 $ok = true;
                 $fornecedor->setIdFornecedor($fornecedorBD->getIdFornecedor());
 
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
             }
 
         }else {
             $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
 
     private function testa_deletar($fornecedor, $FornecedorDAO, &$ok){
-        $FornecedorDAO->deletarFornecedor($fornecedor);
+        
+        if ($FornecedorDAO->deletarFornecedor($fornecedor)){
 
-        if ($FornecedorDAO->selecionarFornecedorID($fornecedor) == new FornecedorVO()){
-            $ok = true;
+            if ($FornecedorDAO->selecionarFornecedorID($fornecedor) == new FornecedorVO()){
+                $ok = true;
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
+            }
+
+        }else {
+            $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
-
-    
-
 }
 
 $user = new TestFornecedorDAO();

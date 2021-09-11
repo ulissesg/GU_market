@@ -21,16 +21,16 @@ class TestCarrinhoDAO{
             $produto = new ProdutoVO();
             $produto2 = new ProdutoVO();
             $produto3 = new ProdutoVO();
-            $produtoDAO = new ProdutoDAO();
+            $carrinhoDAO = new ProdutoDAO();
 
-            $this->setup($fornecedor, $fornecedorDAO, $produto, $produto2, $produto3, $produtoDAO,
+            $this->setup($fornecedor, $fornecedorDAO, $produto, $produto2, $produto3, $carrinhoDAO,
                             $usuario, $usuarioDAO);
 
             $this->testa_inserir($carrinho, $usuario, $produto, $CarrinhoDAO, $ok);
 
             $this->testa_editar($carrinho, $produto2, $produto, $CarrinhoDAO, $ok);  
             
-            $this->testa_seleciona_todos($carrinho, $usuario, $produto, $produto3, $usuarioDAO, $CarrinhoDAO, $ok);
+            $this->testa_seleciona_todos($carrinho, $usuario, $produto, $produto3, $CarrinhoDAO, $ok);
             
             $this->testa_deletar($carrinho, $CarrinhoDAO, $ok);  
 
@@ -51,7 +51,7 @@ class TestCarrinhoDAO{
     }
 
     private function setup(&$fornecedor, &$fornecedorDAO, &$produto, &$produto2, &$produto3,
-                            &$produtoDAO, &$usuario, &$usuarioDAO){
+                            &$carrinhoDAO, &$usuario, &$usuarioDAO){
         $fornecedor->setNome('Test Carrinho');
         $fornecedor->setCnpj('252482156256225');
         $fornecedorDAO->inserirFornecedor($fornecedor);
@@ -63,8 +63,8 @@ class TestCarrinhoDAO{
         $produto->setFabricante('fabricante teste');
         $produto->setValidade('2021-12-25');
         $produto->setFkFornecedor($fornecedor->getIdFornecedor());
-        $produtoDAO->inserirProduto($produto);
-        $produto = $produtoDAO->selecionarProdutoCodigoBarras($produto);
+        $carrinhoDAO->inserirProduto($produto);
+        $produto = $carrinhoDAO->selecionarProdutoCodigoBarras($produto);
 
         $produto2->setNome('test-002');
         $produto2->setDescricao('descricao teste 2');
@@ -72,8 +72,8 @@ class TestCarrinhoDAO{
         $produto2->setFabricante('fabricante teste 2');
         $produto2->setValidade('2021-12-24');
         $produto2->setFkFornecedor($fornecedor->getIdFornecedor());
-        $produtoDAO->inserirProduto($produto2);
-        $produto2 = $produtoDAO->selecionarProdutoCodigoBarras($produto2);
+        $carrinhoDAO->inserirProduto($produto2);
+        $produto2 = $carrinhoDAO->selecionarProdutoCodigoBarras($produto2);
     
         $produto3->setNome('test-002');
         $produto3->setDescricao('descricao teste 2');
@@ -81,8 +81,8 @@ class TestCarrinhoDAO{
         $produto3->setFabricante('fabricante teste 2');
         $produto3->setValidade('2021-12-24');
         $produto3->setFkFornecedor($fornecedor->getIdFornecedor());
-        $produtoDAO->inserirProduto($produto3);
-        $produto3 = $produtoDAO->selecionarProdutoCodigoBarras($produto3);
+        $carrinhoDAO->inserirProduto($produto3);
+        $produto3 = $carrinhoDAO->selecionarProdutoCodigoBarras($produto3);
 
         $usuario->setNome('test-001');
         $usuario->setSenha('12*56L85');
@@ -107,10 +107,14 @@ class TestCarrinhoDAO{
                 $ok = true;
                 $carrinho[0]->setIdCarrinho($carrinhoBD->getIdCarrinho());
 
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
             }
 
         }else {
-            throw new Exception("Nao foi possivel inserir o Carrinho", 1);
+            $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
 
@@ -130,14 +134,19 @@ class TestCarrinhoDAO{
                 $ok = true;
                 $carrinho[0]->setIdCarrinho($carrinhoBD->getIdCarrinho());
 
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
             }
 
         }else {
             $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
 
-    private function testa_seleciona_todos(&$carrinho, $usuario, $produto, $produto3, $usuarioDAO, $CarrinhoDAO, &$ok){
+    private function testa_seleciona_todos(&$carrinho, $usuario, $produto, $produto3,
+                                            $CarrinhoDAO, &$ok){
 
         $carrinho[1] = new CarrinhoVO();
         $carrinho[1]->setUsuario($usuario->getIdUsuario());
@@ -150,40 +159,54 @@ class TestCarrinhoDAO{
         $CarrinhoDAO->inserirCarrinho($carrinho[1]);
         $CarrinhoDAO->inserirCarrinho($carrinho[2]);
 
+        $carrinho[1] = $CarrinhoDAO->selecionarCarrinhoUsuarioProduto($carrinho[1]);
+        $carrinho[2] = $CarrinhoDAO->selecionarCarrinhoUsuarioProduto($carrinho[2]);
+
         $carrinhoBD = $CarrinhoDAO->buscarCarrinhoUsuario($usuario->getIdUsuario());
 
         if ($carrinhoBD) {
             
-        
-            foreach($carrinhoBD as $i=>$carrinhoB){
-                if ($carrinho[$i]->getUsuario() == $carrinhoB->getUsuario() and
-                    $carrinho[$i]->getProduto() == $carrinhoB->getProduto()){
+            $iBD = count($carrinhoBD) - 3;
+            $iF = 0;
 
+            while($iBD < count($carrinhoBD)){
+                
+                if ($carrinho[$iF] == $carrinhoBD[$iBD]){
                     $ok = true;
-                    $carrinho[$i]->setIdCarrinho($carrinhoB->getIdCarrinho());
+                    $carrinho[$iF]->setIdCarrinho($carrinhoBD[$iBD]->getIdCarrinho());
+                    
 
                 }else {
-                    $ok = false;
+                    throw new Error('incompatible result from bd', 1);
                 }
+                $iBD++;
+                $iF ++;
             }
-            
-
-        }
+        
+        }else {
+            $ok = false;
+            throw new Error('No results back from bd', 1);
+        }          
     }
 
     private function testa_deletar(&$carrinho, $CarrinhoDAO, &$ok){
-        $CarrinhoDAO->deletarCarrinho($carrinho[0]);
-        // $CarrinhoDAO->deletarCarrinho($carrinho[1]);
-        // $CarrinhoDAO->deletarCarrinho($carrinho[2]);
+    
+        if($CarrinhoDAO->deletarCarrinho($carrinho[0]) and $CarrinhoDAO->deletarCarrinho($carrinho[1]) and
+            $CarrinhoDAO->deletarCarrinho($carrinho[2])){
 
-        if ($CarrinhoDAO->selecionarCarrinhoID($carrinho[0]) == new CarrinhoVO() ){
+            if ($CarrinhoDAO->selecionarCarrinhoID($carrinho[0]) == new CarrinhoVO() ){
 
-            $ok = true;
+                $ok = true;
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
+            }
+
+        }else {
+            $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
-
-    
-
 }
 
 $user = new TestCarrinhoDAO();

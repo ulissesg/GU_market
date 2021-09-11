@@ -67,10 +67,14 @@ class TestProdutoDAO{
                 $ok = true;
                 $produto[0]->setIdProduto($produtoBD->getIdProduto());
 
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
             }
 
         }else {
             $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
 
@@ -95,10 +99,14 @@ class TestProdutoDAO{
                 $ok = true;
                 $produto[0]->setIdProduto($produtoBD->getIdProduto());
 
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
             }
 
         }else {
             $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
 
@@ -123,35 +131,54 @@ class TestProdutoDAO{
         $ProdutoDAO->inserirProduto($produto[1]);
         $ProdutoDAO->inserirProduto($produto[2]);
 
+        $produto[1] = $ProdutoDAO->selecionarProdutoCodigoBarras($produto[1]);
+        $produto[2] = $ProdutoDAO->selecionarProdutoCodigoBarras($produto[2]);
+
         $produtoBD = $ProdutoDAO->selecionarTodos();
 
-        if ($produtoBD) {
+        if ($produtoBD) {   
 
-            foreach($produtoBD as $i=>$produtoB){
-                if ($produto[$i] == $produtoB){
+            $iBD = count($produtoBD) - 3;
+            $iF = 0;
 
+            while($iBD < count($produtoBD)){
+
+                if ($produto[$iF] == $produtoBD[$iBD]){
                     $ok = true;
-                    $produto[$i]->setIdProduto($produtoB->getIdProduto());
+                    $produto[$iF]->setIdProduto($produtoBD[$iBD]->getIdProduto());
+                    
 
                 }else {
-                    $ok = false;
+                    throw new Error('incompatible result from bd', 1);
                 }
+                $iBD++;
+                $iF ++;
             }
-            
-
+        
+        }else {
+            $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
 
     private function testa_deletar(&$produto, $ProdutoDAO, &$ok){
-        $ProdutoDAO->deletarProduto($produto[0]);
-        $ProdutoDAO->deletarProduto($produto[1]);
-        $ProdutoDAO->deletarProduto($produto[2]);
+    
+        if( $ProdutoDAO->deletarProduto($produto[0]) and $ProdutoDAO->deletarProduto($produto[1]) and
+            $ProdutoDAO->deletarProduto($produto[2])){
 
-        if ($ProdutoDAO->selecionarProdutoID($produto[0]) == new ProdutoVO() and
-            $ProdutoDAO->selecionarProdutoID($produto[1]) == new ProdutoVO() and
-            $ProdutoDAO->selecionarProdutoID($produto[2]) == new ProdutoVO()){
+            if ($ProdutoDAO->selecionarProdutoID($produto[0]) == new ProdutoVO() and
+                $ProdutoDAO->selecionarProdutoID($produto[1]) == new ProdutoVO() and
+                $ProdutoDAO->selecionarProdutoID($produto[2]) == new ProdutoVO()){
 
-            $ok = true;
+                $ok = true;
+            }else {
+                $ok = false;
+                throw new Error('Incompatible result from bd', 1);
+            }
+
+        }else {
+            $ok = false;
+            throw new Error('No results back from bd', 1);
         }
     }
 

@@ -23,7 +23,9 @@
             <a href="#" class="text-decoration-none text-light">Sair</a>
         </li>
         <li class="nav-item mx-4 mt-3 ">
-            <a href="#"><img src="/gu_market/src/view/img/shopping_cart.png" width="25px"></a>
+            <a href="/gu_market/src/view/carrinho.php">
+                <img src="/gu_market/src/view/img/shopping_cart.png" width="25px">
+            </a>
         </li>
     </ul>
     
@@ -32,11 +34,10 @@
 <div class="text-center m-4">
     <div class="btn-group">
 
-    <a href="/gu_market/index.php" class="btn btn-secondary">Início</a>
-    <a href="#" class="btn btn-secondary">Inserir Produto</a>
-    <a href="#" class="btn btn-secondary">Listar fornecedores</a>
-    <a href="#" class="btn btn-secondary">Inserir fornecedor</a>
-
+    <a href="/gu_market/src/view/produtos.php" class="btn btn-secondary">Início</a>
+    <a href="/gu_market/src/view/produto_form.php" class="btn btn-secondary">Inserir Produto</a>
+    <a href="/gu_market/src/view/fornecedores.php" class="btn btn-secondary">Listar fornecedores</a>
+    <a href="/gu_market/src/view/fornecedor_form.php" class="btn btn-secondary">Inserir fornecedor</a>
 
     </div>
 </div>

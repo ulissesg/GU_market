@@ -1,7 +1,7 @@
 <?php 
 
-include_once './src/model/VO/FornecedorVO.php';
-include_once './config/MySqlConfig.php';
+include_once __DIR__ .'../../VO/FornecedorVO.php';
+include_once __DIR__ .'../../../../config/MySqlConfig.php';
 
 class FornecedorDAO{
 
@@ -83,6 +83,40 @@ class FornecedorDAO{
                     $fornecedorBD->setIdFornecedor($forne['idFornecedor']);
                     $fornecedorBD->setNome($forne['nome']);
                     $fornecedorBD->setCnpj($forne['cnpj']);
+                }
+
+                return $fornecedorBD;
+
+            }else {
+                return null;
+            }            
+
+
+        } catch (PDOException $pdo) {
+            echo $pdo->getMessage();
+        } catch (Exception $e){
+            echo $e->getMessage();
+        }
+    }
+
+    public function selecionarTodos(){
+        try {
+            $conexao = new conexaoBD;
+            $conexao = $conexao->conectar();
+        
+            $query = $conexao->prepare( "SELECT * FROM fornecedor");
+            $query->execute();
+
+            $conexao = null;
+
+            if($query){
+                $fornecedorBD = [];
+
+                foreach($query as $i=>$forne){
+                    $fornecedorBD[$i] = new FornecedorVO();
+                    $fornecedorBD[$i]->setIdFornecedor($forne['idFornecedor']);
+                    $fornecedorBD[$i]->setNome($forne['nome']);
+                    $fornecedorBD[$i]->setCnpj($forne['cnpj']);
                 }
 
                 return $fornecedorBD;

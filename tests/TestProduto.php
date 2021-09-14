@@ -1,7 +1,9 @@
 <?php
 
-include_once "./src/model/DAO/ProdutoDAO.php";
-include_once "./src/model/DAO/FornecedorDAO.php";
+
+include_once __DIR__."../../src/model/DAO/ProdutoDAO.php";
+include_once __DIR__."../../src/model/DAO/FornecedorDAO.php";
+
 
 class TestProdutoDAO{
 
@@ -163,7 +165,8 @@ class TestProdutoDAO{
 
     private function testa_deletar(&$produto, $ProdutoDAO, &$ok){
     
-        if( $ProdutoDAO->deletarProduto($produto[0]) and $ProdutoDAO->deletarProduto($produto[1]) and
+        if( $ProdutoDAO->deletarProduto($produto[0]) and 
+            $ProdutoDAO->deletarProduto($produto[1]) and
             $ProdutoDAO->deletarProduto($produto[2])){
 
             if ($ProdutoDAO->selecionarProdutoID($produto[0]) == new ProdutoVO() and

@@ -6,12 +6,12 @@
     <div class="mx-5 px-5">
         <div class="mx-5 my-2 px-5">
             <label class="form-label">Nome</label>
-            <input type="text" class="form-control">
+            <input type="text" name="nome" class="form-control">
         </div>
         
         <div class="mx-5 my-2 px-5">
             <label class="form-label">Senha</label>
-            <input type="text" class="form-control">
+            <input type="text" name="senha" class="form-control">
         </div>
 
         <div class="mx-5 my-2 px-5 text-center">

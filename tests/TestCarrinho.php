@@ -1,9 +1,9 @@
 <?php
 
-include_once "./src/model/DAO/ProdutoDAO.php";
-include_once "./src/model/DAO/FornecedorDAO.php";
-include_once "./src/model/DAO/UsuarioDAO.php";
-include_once "./src/model/DAO/CarrinhoDAO.php";
+include_once __DIR__."../../src/model/DAO/ProdutoDAO.php";
+include_once __DIR__."../../src/model/DAO/FornecedorDAO.php";
+include_once __DIR__."../../src/model/DAO/UsuarioDAO.php";
+include_once __DIR__."../../src/model/DAO/CarrinhoDAO.php";
 
 class TestCarrinhoDAO{
 
@@ -191,10 +191,13 @@ class TestCarrinhoDAO{
 
     private function testa_deletar(&$carrinho, $CarrinhoDAO, &$ok){
     
-        if($CarrinhoDAO->deletarCarrinho($carrinho[0]) and $CarrinhoDAO->deletarCarrinho($carrinho[1]) and
+        if($CarrinhoDAO->deletarCarrinho($carrinho[0]) and 
+            $CarrinhoDAO->deletarCarrinho($carrinho[1]) and
             $CarrinhoDAO->deletarCarrinho($carrinho[2])){
 
-            if ($CarrinhoDAO->selecionarCarrinhoID($carrinho[0]) == new CarrinhoVO() ){
+            if ($CarrinhoDAO->selecionarCarrinhoID($carrinho[0]) == new CarrinhoVO() and 
+                $CarrinhoDAO->selecionarCarrinhoID($carrinho[1]) == new CarrinhoVO() and
+                $CarrinhoDAO->selecionarCarrinhoID($carrinho[2]) == new CarrinhoVO()){
 
                 $ok = true;
             }else {

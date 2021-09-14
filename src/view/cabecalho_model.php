@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 <title>GU Market</title>
 </head>
-<body class="border border-lighter border border-2 rounded  m-5 " style="background-color: RGB(247,247,247);">
+<body class="border border-lighter border border-2 rounded  m-3 " style="background-color: RGB(247,247,247);">
 
 <ul class="nav nav-pills nav-fill bg-secondary text-light rounded mb-3">
     <li class="nav-item text-start mx-3 mt-2">

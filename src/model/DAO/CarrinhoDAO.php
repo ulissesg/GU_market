@@ -1,8 +1,8 @@
 <?php 
 
-include_once './src/model/VO/CarrinhoVO.php';
-include_once "./src/model/DAO/UsuarioDAO.php";
-include_once './config/MySqlConfig.php';
+include_once __DIR__.'../../VO/CarrinhoVO.php';
+include_once __DIR__.'/UsuarioDAO.php';
+include_once __DIR__.'../../../../config/MySqlConfig.php';
 
 class CarrinhoDAO{
 

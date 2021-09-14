@@ -1,7 +1,7 @@
 <?php 
 
-include_once './src/model/VO/ProdutoVO.php';
-include_once './config/MySqlConfig.php';
+include_once __DIR__.'../../VO/ProdutoVO.php';
+include_once __DIR__.'../../../../config/MySqlConfig.php';
 
 class ProdutoDAO{
 

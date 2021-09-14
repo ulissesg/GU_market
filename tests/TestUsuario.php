@@ -1,6 +1,6 @@
 <?php
 
-include_once "./src/model/DAO/UsuarioDAO.php";
+include_once __DIR__."../../src/model/DAO/UsuarioDAO.php";
 
 class TestUsuarioDAO{
 

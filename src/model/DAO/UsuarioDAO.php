@@ -1,8 +1,7 @@
 <?php 
 
-include_once  "./src/model/VO/UsuarioVO.php";
-include_once  "./config/MySqlConfig.php";
-
+include_once __DIR__."../../VO/UsuarioVO.php";
+include_once __DIR__.'../../../../config/MySqlConfig.php';
 class usuarioDAO{
 
     public function inserirUsuario($usuario){

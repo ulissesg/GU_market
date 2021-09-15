@@ -1,16 +1,21 @@
 <?php 
 include_once "cabecalho_model.php" ;
 
-include_once "../../src/controler/message/messageProdutos.php";
-
 if(isset($_SESSION)){
     if (array_key_exists('id', $_SESSION)){
 
+        include_once "../../src/controler/message/messageProdutos.php";
+
         include_once "../model/DAO/ProdutoDAO.php";
+        include_once "../model/DAO/FornecedorDAO.php";
+        $fornecedorDAO = new FornecedorDAO();
+        $fornecedor = new FornecedorVO();
         $produtoDAO = new ProdutoDAO();
         $produtos = $produtoDAO->selecionarTodos();
         
-        foreach($produtos as $i=>$p){
+        foreach($produtos as $p){
+            $fornecedor->setIdFornecedor($p->getFkFornecedor());
+            $fornecedor = $fornecedorDAO->selecionarFornecedorID($fornecedor);
             ?>
             <div class="m-5 border border-lighter border-2 rounded">
                 <div class="d-flex bd-highlight m-4">
@@ -23,7 +28,7 @@ if(isset($_SESSION)){
                         </div>
                         <div class="d-flex justify-content-between m-1">
                             <p class="">Validade: <?php echo $p->getValidade(); ?></p>
-                            <p class="">Fornecedor: <?php echo $p->getFkFornecedor(); ?></p>
+                            <p class="">Fornecedor: <?php echo $fornecedor->getNome(); ?></p>
                         </div>
                     </div>
                     <div class="d-flex align-self-center flex-column  bd-highlight ">

@@ -3,5 +3,4 @@ function showConfirm(id){
 }
 function deleteConfirmed(id){
     location.href = "../../src/controler/deleteProduto.php?id=" + id;
-    document.getElementById(id).classList.add("d-none"); 
 }

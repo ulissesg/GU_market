@@ -1,4 +1,9 @@
-<?php include_once "cabecalho_model.php"; ?>
+<?php 
+include_once "cabecalho_model.php"; 
+if(isset($_SESSION)){
+    if (array_key_exists('id', $_SESSION)){
+
+?>
 
 <div class="m-5 px-5">
     <form method="POST">
@@ -44,4 +49,8 @@
     </form>
 </div>
 
-<?php include_once "rodape.php" ?>
+<?php 
+    }
+}
+include_once "rodape.php" ;
+?>

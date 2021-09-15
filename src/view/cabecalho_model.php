@@ -40,7 +40,7 @@ if(!isset($_SESSION)){
 <div class="text-center m-4">
     <div class="btn-group">
 
-    <a href="/gu_market/src/view/produtos.php" class="btn btn-secondary">Início</a>
+    <a href="/gu_market/src/view/produtos.php" class="btn btn-secondary">Produtos</a>
     <a href="/gu_market/src/view/produto_form.php" class="btn btn-secondary">Inserir Produto</a>
     <a href="/gu_market/src/view/fornecedores.php" class="btn btn-secondary">Listar fornecedores</a>
     <a href="/gu_market/src/view/fornecedor_form.php" class="btn btn-secondary">Inserir fornecedor</a>

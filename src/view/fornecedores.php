@@ -1,4 +1,9 @@
-<?php include_once "cabecalho_model.php" ?>
+<?php 
+include_once "cabecalho_model.php" ;
+if(isset($_SESSION)){
+    if (array_key_exists('id', $_SESSION)){
+
+?>
 
 <div class="m-5  border border-lighter border-2 rounded">
     <div class="d-flex bd-highlight">
@@ -75,4 +80,8 @@
 <script src="/gu_market/src/js/deleteAlertFornecedor.js"></script>
 
 
-<?php include_once "rodape.php" ?>
+<?php 
+    }
+}
+include_once "rodape.php" ;
+?>

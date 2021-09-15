@@ -1,3 +1,9 @@
+<?php 
+if(!isset($_SESSION)){
+    session_start();
+    if (array_key_exists('id', $_SESSION)){
+?>
+
 </body>
 </html>
 <!DOCTYPE html>
@@ -17,10 +23,10 @@
     </li>
     <ul class="nav justify-content-end align-middle">
         <li class="nav-item mx-4 mt-3">
-            <p> bem vindo ""nome""</p>
+            <p> bem vindo <?php echo $_SESSION['nome'] ?></p>
         </li>
         <li class="nav-item mx-4 mt-3">
-            <a href="#" class="text-decoration-none text-light">Sair</a>
+            <a href="../controler/sairControl.php" class="text-decoration-none text-light">Sair</a>
         </li>
         <li class="nav-item mx-4 mt-3 ">
             <a href="/gu_market/src/view/carrinho.php">
@@ -41,3 +47,31 @@
 
     </div>
 </div>
+    
+
+<?php
+    }else {
+?>
+
+</body>
+    </html>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <title>GU Market</title>
+    </head>
+    <body class="border border-lighter border border-2 rounded  m-3 " style="background-color: RGB(247,247,247);">
+    
+    <div class="text-center m-5">
+        <h2>Acesso não autorizado, por favor faça login </h2>
+        <a href="/gu_market/index.php" class="btn btn-secondary mt-3">Voltar a pagina de login</a>
+    </div>
+
+<?php 
+    }
+}
+?>

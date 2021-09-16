@@ -1,4 +1,7 @@
 <?php 
+if (!isset($_SESSION)){
+    session_start();
+}
 include_once "../../src/model/DAO/ProdutoDAO.php";
 
 $produtoDAO = new ProdutoDAO();

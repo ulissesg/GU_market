@@ -37,7 +37,7 @@ if(isset($_SESSION)){
                         </div>  
 
                         <div class="p-2 bd-highlight text-center">
-                            <a href="/gu_market/src/view/produto_form.php" class="btn btn-primary">Editar</a>
+                            <a href="/gu_market/src/view/produto_form.php?id=<?php echo $p->getIdProduto(); ?>" class="btn btn-primary">Editar</a>
                         </div>
                           
                         <div class="p-2 bd-highlight text-center">

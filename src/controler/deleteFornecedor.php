@@ -1,4 +1,7 @@
 <?php 
+if (!isset($_SESSION)){
+    session_start();
+}
 include_once "../../src/model/DAO/FornecedorDAO.php";
 
 $fornecedorDAO = new FornecedorDAO();

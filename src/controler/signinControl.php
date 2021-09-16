@@ -12,6 +12,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" and !empty($_POST['nome'])
 
     if ($usuarioDAO->inserirUsuario($usuario)){
         header('Location: /gu_market/index.php?message=0');
+    }else{
+        header('Location: /gu_market/src/view/signin.php?error=1');
     }
 }else {
     header('Location: /gu_market/src/view/signin.php?error=0');

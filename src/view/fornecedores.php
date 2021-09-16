@@ -20,7 +20,7 @@ if(isset($_SESSION)){
                     </div>
                     <div class="d-flex align-self-center flex-column  bd-highlight  m-4">
                         <div class="p-2 bd-highlight text-center">
-                            <a href="/gu_market/src/view/fornecedor_form.php" class="btn btn-primary">Editar</a>
+                            <a href="/gu_market/src/view/fornecedor_form.php?id=<?php echo $f->getIdFornecedor(); ?>" class="btn btn-primary">Editar</a>
                         </div>
                         <div class="p-2 bd-highlight text-center">
                             <a onclick="showConfirm('<?php echo $f->getIdFornecedor(); ?>');" class="btn btn-danger">Delete</a>
